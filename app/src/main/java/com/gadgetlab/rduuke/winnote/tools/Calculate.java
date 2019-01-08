@@ -1,11 +1,10 @@
-package com.gadgetlab.rduuke.winnote.entity;
+package com.gadgetlab.rduuke.winnote.tools;
 
 import java.util.ArrayList;
 
 public class Calculate {
 
-    private int rated_average;
-    private double note = 0;
+    private double note;
     private ArrayList<Double> notes;
     private ArrayList<Double> averages;
     private double average_total;
@@ -17,14 +16,16 @@ public class Calculate {
 
     public double currentNote()
     {
+        this.note = 0;
         for(int a = 0; a < this.notes.size(); a++) {
             this.note = this.notes.get(a)*(this.averages.get(a)/100) + this.note;
         }
         return this.note;
     }
 
-    private double averageTotal()
+    public double averageTotal()
     {
+        this.average_total = 0;
         for (int a = 0; a < this.averages.size(); a++) {
 
             this.average_total = this.averages.get(a) + this.average_total;
@@ -34,10 +35,12 @@ public class Calculate {
 
     public double necessaryNote()
     {
-        double limit = 3 - this.currentNote();
+        double limit = 3 - this.note;
 
-        double promedio = (100 - this.averageTotal())/100;
-
-        return limit/promedio;
+        double promedio = (100 - averageTotal())/100;
+        if (promedio != 0) {
+            return limit/promedio;
+        }
+        return 0;
     }
 }

@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gadgetlab.rduuke.winnote.adapters.adapterNotes;
-import com.gadgetlab.rduuke.winnote.entity.Calculate;
+import com.gadgetlab.rduuke.winnote.tools.Calculate;
 import com.gadgetlab.rduuke.winnote.entity.MateriasModel;
 import com.gadgetlab.rduuke.winnote.entity.Note;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -31,7 +30,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -90,8 +88,8 @@ public class DetallesMateriaActivity extends AppCompatActivity {
                     arrayNotes.add(note);
                 }
                 Calculate calculate = new Calculate(arrayListNotes, arrayListPromedios);
-                notaFinal.setText("Nota final: "+String.format("%.2f", calculate.currentNote()));
-                notaParcial.setText("Nota necesaria: "+String.format("%.2f", calculate.necessaryNote()));
+                notaFinal.setText("Nota final ("+ String.valueOf(calculate.averageTotal()) +"): "+String.format("%.2f", calculate.currentNote()));
+                notaParcial.setText("Nota necesaria ("+ (100 - calculate.averageTotal()) +"): "+String.format("%.2f", calculate.necessaryNote()));
                 adapterNotes adapterNotes = new adapterNotes(getApplicationContext(), arrayNotes);
                 notesRecycler.setAdapter(adapterNotes);
             }

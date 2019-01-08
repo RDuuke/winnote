@@ -8,10 +8,18 @@ import java.io.Serializable;
 public class MateriasModel implements Serializable {
     protected String name, key;
 
-    protected Double note_necessary, note_final;
+    protected Double note_necessary, note_final, promedioTotal;
 
     public void setNote_necessary(Double note_necessary) {
         this.note_necessary = note_necessary;
+    }
+
+    public Double getPromedioTotal() {
+        return promedioTotal;
+    }
+
+    public void setPromedioTotal(Double promedioTotal) {
+        this.promedioTotal = promedioTotal;
     }
 
     public void setKey(String key) {

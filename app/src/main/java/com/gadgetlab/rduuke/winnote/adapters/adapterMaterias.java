@@ -49,8 +49,8 @@ public class adapterMaterias extends RecyclerView.Adapter<adapterMaterias.Materi
         MateriasModel materiasModel = materiasModelArrayList.get(position);
         Log.w("AdapterMateria", materiasModel.getName());
         materiasViewHolder.nombre.setText(materiasModel.getName().toUpperCase());
-        materiasViewHolder.notaFinal.setText("Nota final: "+materiasModel.getNoteFinal());
-        materiasViewHolder.notaParcial.setText("Nota necesaria: "+materiasModel.getNoteNecessary());
+        materiasViewHolder.notaFinal.setText("Nota final("+String.valueOf(materiasModel.getPromedioTotal())+"): "+materiasModel.getNoteFinal());
+        materiasViewHolder.notaParcial.setText("Nota necesaria("+String.valueOf(100-materiasModel.getPromedioTotal())+"): "+materiasModel.getNoteNecessary());
         materiasViewHolder.position.setText(String.valueOf(position));
     }
 
