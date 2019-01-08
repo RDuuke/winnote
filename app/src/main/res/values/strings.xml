@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">winnote</string>
+    <string name="nombre_de_la_materia">Nombre de la materia</string>
+    <string name="add">Agregar</string>
+    <string name="close">Cancelar</string>
 </resources>
