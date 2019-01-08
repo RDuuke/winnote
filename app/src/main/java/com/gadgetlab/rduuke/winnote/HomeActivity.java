@@ -1,8 +1,6 @@
 package com.gadgetlab.rduuke.winnote;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AppComponentFactory;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +17,7 @@ import android.widget.EditText;
 
 
 import com.gadgetlab.rduuke.winnote.adapters.adapterMaterias;
-import com.gadgetlab.rduuke.winnote.entity.Calculate;
+import com.gadgetlab.rduuke.winnote.tools.Calculate;
 import com.gadgetlab.rduuke.winnote.entity.MateriasModel;
 import com.gadgetlab.rduuke.winnote.entity.Note;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -130,9 +127,10 @@ public class HomeActivity extends AppCompatActivity {
                     materia.setNote_final(calculate.currentNote());
                     materia.setNote_necessary(calculate.necessaryNote());
                     materia.setKey(data.getKey());
+                    materia.setPromedioTotal(calculate.averageTotal());
                     subjectArrayList.add(materia);
                 }
-                adapterMaterias = new adapterMaterias(getApplicationContext(), subjectArrayList);
+                adapterMaterias = new adapterMaterias(mContext, subjectArrayList);
                 recyclerMateria.setAdapter(adapterMaterias);
             }
             @Override
@@ -143,13 +141,6 @@ public class HomeActivity extends AppCompatActivity {
         materiaFirebase.addValueEventListener(eventMateriaFirebase);
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //apterSubject adapterSubject = new AdapterSubject(dataset, this);
-        //mRecyclerView.setAdapter(adapterSubject);
-    }
 
 
     protected String sha1Name(String txt) throws NoSuchAlgorithmException {
@@ -163,4 +154,8 @@ public class HomeActivity extends AppCompatActivity {
         return stringBuffer.toString();
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }
